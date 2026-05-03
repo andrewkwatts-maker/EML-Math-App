@@ -1,0 +1,16 @@
+# Shared theme rules — kept lean. Each screen has its own .kv.
+
+#:import dp kivy.metrics.dp
+
+
+<NavBar@MDBoxLayout>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(56)
+    md_bg_color: app.theme_cls.bg_dark
+    spacing: dp(2)
+
+
+<NavButton@MDFlatButton>:
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.primary_color

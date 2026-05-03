@@ -1,0 +1,28 @@
+#:import dp kivy.metrics.dp
+
+
+<AboutScreen>:
+    name: "about"
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(8)
+
+        MDTopAppBar:
+            title: "About"
+            left_action_items: [["arrow-left", lambda x: setattr(app.root, "current", "home")]]
+
+        MDLabel:
+            text: f"EML-Math-App v{root.version}"
+            font_style: "H5"
+            size_hint_y: None
+            height: dp(40)
+        MDLabel:
+            text: f"Built on eml-math {root.eml_version}"
+            theme_text_color: "Hint"
+            size_hint_y: None
+            height: dp(28)
+        MDLabel:
+            text: "Visual explorer for the EML Sheffer operator  eml(x, y) = exp(x) − ln(y).\n\nLibrary on PyPI:    pip install eml-math\nApp source:           github.com/andrewkwatts-maker/EML-Math-App\nLibrary source:       github.com/andrewkwatts-maker/EML-Math\n\nLicense: MIT"
+            text_size: self.width, None
+        Widget:

@@ -1,0 +1,58 @@
+#:import dp kivy.metrics.dp
+
+
+<ConvertScreen>:
+    name: "convert"
+    latex_field:  latex_in
+    python_field: python_in
+    eml_field:    eml_in
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(12)
+        spacing: dp(8)
+
+        MDTopAppBar:
+            title: "Convert  —  LaTeX ↔ Python ↔ EML"
+            left_action_items: [["arrow-left", lambda x: setattr(app.root, "current", "builder")]]
+            right_action_items: [["arrow-right", lambda x: setattr(app.root, "current", "compress")]]
+
+        MDLabel:
+            text: "LaTeX (\\sin^2(x) + \\cos^2(x), \\pi, …)"
+            theme_text_color: "Hint"
+            size_hint_y: None
+            height: dp(20)
+        MDTextField:
+            id: latex_in
+            mode: "rectangle"
+            multiline: True
+            size_hint_y: None
+            height: dp(72)
+
+        MDLabel:
+            text: "Python (sin(x)**2 + cos(x)**2, e, pi, …)"
+            theme_text_color: "Hint"
+            size_hint_y: None
+            height: dp(20)
+        MDTextField:
+            id: python_in
+            mode: "rectangle"
+            multiline: True
+            size_hint_y: None
+            height: dp(72)
+
+        MDLabel:
+            text: "EML (eml(x, y), eml(0, 1), …)"
+            theme_text_color: "Hint"
+            size_hint_y: None
+            height: dp(20)
+        MDTextField:
+            id: eml_in
+            mode: "rectangle"
+            multiline: True
+            size_hint_y: None
+            height: dp(72)
+
+        MDLabel:
+            text: root.status
+            theme_text_color: "Secondary"

@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eml-math-app"
+version = "1.3.1"
+description = "KivyMD visual explorer for the eml-math PyPI library: build EML expressions, render the binary tree, convert between LaTeX/MathJax/EML/Python, browse 136 named constants, run compress/decompress."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Andrew K Watts", email = "andrewkwatts@gmail.com" }]
+keywords = ["eml", "math", "kivy", "kivymd", "android", "visual", "explorer",
+            "expression-tree", "symbolic-regression"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: MacOS X",
+    "Environment :: Win32 (MS Windows)",
+    "Environment :: X11 Applications",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Education",
+]
+
+dependencies = [
+    "kivy>=2.3,<3",
+    "kivymd>=1.2,<2",
+    "Pillow>=10",
+    "eml-math>=1.3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov",
+    "pyinstaller>=6.0",
+    "buildozer>=1.5",   # Linux/WSL only — see build_apk.bat
+]
+
+[project.urls]
+Homepage = "https://github.com/andrewkwatts-maker/EML-Math-App"
+Repository = "https://github.com/andrewkwatts-maker/EML-Math-App"
+"EML-Math (PyPI)" = "https://pypi.org/project/eml-math/"
+
+[project.scripts]
+eml-math-app = "eml_math_app.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+eml_math_app = [
+    "kv/*.kv",
+    "assets/*.png",
+    "assets/*.svg",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
