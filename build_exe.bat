@@ -18,21 +18,15 @@ echo Installing build dependencies and project ...
 
 echo.
 echo Running PyInstaller ...
-%PY% -m PyInstaller ^
-    --noconfirm ^
-    --name "EML-Math-App" ^
-    --windowed ^
-    --onefile ^
-    --add-data "src\eml_math_app\kv;eml_math_app\kv" ^
-    --add-data "src\eml_math_app\assets;eml_math_app\assets" ^
-    --collect-all kivymd ^
-    --collect-all kivy ^
-    --collect-all eml_math ^
-    src\eml_math_app\__main__.py
+REM Build from EML-Math-App.spec — the spec uses Kivy's official PyInstaller
+REM hooks (kivy_deps + kivy.tools.packaging.pyinstaller_hooks). Do NOT replace
+REM with --collect-all kivy: that crashes on Kivy 2.3 / Python 3.13 because
+REM kivy.garden is a legacy namespace package with a non-list __path__.
+%PY% -m PyInstaller --noconfirm EML-Math-App.spec
 
 echo.
 if exist dist\EML-Math-App.exe (
-    echo BUILD OK  ->  dist\EML-Math-App.exe
+    echo BUILD OK  --  dist\EML-Math-App.exe
 ) else (
     echo BUILD FAILED.
     exit /b 1

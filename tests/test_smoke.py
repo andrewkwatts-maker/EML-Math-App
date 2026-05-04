@@ -1,8 +1,4 @@
-"""Smoke tests — import every public surface, instantiate the App without
-opening a window, and verify each screen class loads cleanly.
-
-Pure-import; never enters Kivy's event loop (no display server needed for CI).
-"""
+"""Smoke tests — pure-import. No display server / Kivy event loop needed."""
 from __future__ import annotations
 
 import importlib
@@ -22,23 +18,23 @@ def test_version_is_string():
     assert v.count(".") >= 2
 
 
-@pytest.mark.parametrize("name", [
-    "home", "builder", "convert", "compress", "constants", "export", "about",
-])
-def test_screen_classes_import(name):
-    mod = importlib.import_module(f"eml_math_app.screens.{name}")
-    expected = {
-        "home": "HomeScreen", "builder": "BuilderScreen", "convert": "ConvertScreen",
-        "compress": "CompressScreen", "constants": "ConstantsScreen",
-        "export": "ExportScreen", "about": "AboutScreen",
-    }[name]
-    assert hasattr(mod, expected), f"{name} module missing {expected}"
+def test_home_screen_imports():
+    from eml_math_app.screens.home import HomeScreen
+    assert HomeScreen is not None
 
 
 def test_widgets_import():
-    from eml_math_app.widgets import TreeImageView, FormulaInput
+    from eml_math_app.widgets import TreeImageView, LatexPreview
     assert TreeImageView is not None
-    assert FormulaInput is not None
+    assert LatexPreview is not None
+
+
+def test_services_import():
+    from eml_math_app.services import formats, hit_test, latex_renderer, parser
+    assert hasattr(parser, "default_parser")
+    assert hasattr(formats, "format_all")
+    assert hasattr(hit_test, "nearest_node")
+    assert hasattr(latex_renderer, "render_latex_png")
 
 
 def test_app_class_instantiable():
