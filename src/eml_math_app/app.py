@@ -12,6 +12,7 @@ from kivymd.app import MDApp
 
 from eml_math_app import __version__
 # Eager imports so the Factory knows the custom widgets before kv parses.
+from eml_math_app.widgets.expr_input import ExprInput  # noqa: F401
 from eml_math_app.widgets.latex_preview import LatexPreview  # noqa: F401
 from eml_math_app.widgets.svg_view import TreeImageView  # noqa: F401
 
