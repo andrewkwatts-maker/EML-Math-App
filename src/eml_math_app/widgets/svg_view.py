@@ -18,7 +18,7 @@ from typing import Any, Dict, Optional
 
 from kivy.core.image import Image as CoreImage
 from kivy.core.window import Window
-from kivy.properties import NumericProperty, StringProperty
+from kivy.properties import BooleanProperty, NumericProperty, StringProperty
 from kivy.uix.image import Image as KivyImage
 
 from eml_math_app.services.hit_test import nearest_node, project_widget_to_canvas
@@ -42,6 +42,10 @@ class TreeImageView(KivyImage):
     edge_style = StringProperty("curve")
     width_px = NumericProperty(720)
     height_px = NumericProperty(440)
+    # When False the renderer draws topology-only (dots, no labels). The
+    # hover layer keeps working — useful for users who just want the
+    # shape and rely on hover for details.
+    show_labels = BooleanProperty(True)
 
     _last_tree: Optional[Any] = None
     _last_png: Optional[bytes] = None
@@ -69,6 +73,7 @@ class TreeImageView(KivyImage):
             width=int(self.width_px),
             height=int(self.height_px),
             direction=self.direction,
+            show_labels=self.show_labels,
         )
         self._last_tree = tree
         self._last_png = png
